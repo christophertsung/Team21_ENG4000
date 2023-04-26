@@ -13,11 +13,11 @@ HX711 scale;
 
 // GY-521 (Accelerometer variables)
 const int MPU_ADDR = 0x68; // I2C address of the MPU-6050. If AD0 pin is set to HIGH, the I2C address will be 0x69.
-int16_t accelerometer1_x, accelerometer1_y, accelerometer1_z; // variables for accelerometer1 raw data
+float accelerometer1_x, accelerometer1_y, accelerometer1_z; // variables for accelerometer1 raw data
 int16_t gyro1_x, gyro1_y, gyro1_z; // variables for gyro1 raw data
-int16_t accelerometer2_x, accelerometer2_y, accelerometer2_z; // variables for accelerometer2 raw data
+float accelerometer2_x, accelerometer2_y, accelerometer2_z; // variables for accelerometer2 raw data
 int16_t gyro2_x, gyro2_y, gyro2_z; // variables for gyro2 raw data
-int16_t accelerometer3_x, accelerometer3_y, accelerometer3_z; // variables for accelerometer3 raw data
+float accelerometer3_x, accelerometer3_y, accelerometer3_z; // variables for accelerometer3 raw data
 int16_t gyro3_x, gyro3_y, gyro3_z; // variables for gyro3 raw data
 
 //Define variable to store other sensor readings:
@@ -90,6 +90,9 @@ void loop() {
   accelerometer1_x = Wire.read()<<8 | Wire.read(); // reading registers: 0x3B (ACCEL_XOUT_H) and 0x3C (ACCEL_XOUT_L)
   accelerometer1_y = Wire.read()<<8 | Wire.read(); // reading registers: 0x3D (ACCEL_YOUT_H) and 0x3E (ACCEL_YOUT_L)
   accelerometer1_z = Wire.read()<<8 | Wire.read(); // reading registers: 0x3F (ACCEL_ZOUT_H) and 0x40 (ACCEL_ZOUT_L)
+  accelerometer1_x = accelerometer1_x / 16384.0; // convert to g's
+  accelerometer1_y = accelerometer1_y / 16384.0;
+  accelerometer1_z = accelerometer1_z / 16384.0;
   gyro1_x = Wire.read()<<8 | Wire.read(); // reading registers: 0x43 (GYRO_XOUT_H) and 0x44 (GYRO_XOUT_L)
   gyro1_y = Wire.read()<<8 | Wire.read(); // reading registers: 0x45 (GYRO_YOUT_H) and 0x46 (GYRO_YOUT_L)
   gyro1_z = Wire.read()<<8 | Wire.read(); // reading registers: 0x47 (GYRO_ZOUT_H) and 0x48 (GYRO_ZOUT_L)
@@ -104,6 +107,9 @@ void loop() {
   accelerometer2_x = Wire.read()<<8 | Wire.read(); // reading registers: 0x3B (ACCEL_XOUT_H) and 0x3C (ACCEL_XOUT_L)
   accelerometer2_y = Wire.read()<<8 | Wire.read(); // reading registers: 0x3D (ACCEL_YOUT_H) and 0x3E (ACCEL_YOUT_L)
   accelerometer2_z = Wire.read()<<8 | Wire.read(); // reading registers: 0x3F (ACCEL_ZOUT_H) and 0x40 (ACCEL_ZOUT_L)
+  accelerometer2_x = accelerometer2_x / 16384.0; // convert to g's
+  accelerometer2_y = accelerometer2_y / 16384.0;
+  accelerometer2_z = accelerometer2_z / 16384.0;
   gyro2_x = Wire.read()<<8 | Wire.read(); // reading registers: 0x43 (GYRO_XOUT_H) and 0x44 (GYRO_XOUT_L)
   gyro2_y = Wire.read()<<8 | Wire.read(); // reading registers: 0x45 (GYRO_YOUT_H) and 0x46 (GYRO_YOUT_L)
   gyro2_z = Wire.read()<<8 | Wire.read(); // reading registers: 0x47 (GYRO_ZOUT_H) and 0x48 (GYRO_ZOUT_L)
@@ -118,6 +124,9 @@ void loop() {
   accelerometer3_x = Wire.read()<<8 | Wire.read(); // reading registers: 0x3B (ACCEL_XOUT_H) and 0x3C (ACCEL_XOUT_L)
   accelerometer3_y = Wire.read()<<8 | Wire.read(); // registers: 0x3D (ACCEL_YOUT_H) and 0x3E (ACCEL_YOUT_L)
   accelerometer3_z = Wire.read()<<8 | Wire.read(); // reading registers: 0x3F (ACCEL_ZOUT_H) and 0x40 (ACCEL_ZOUT_L)
+  accelerometer3_x = accelerometer3_x / 16384.0; // convert to g's
+  accelerometer3_y = accelerometer3_y / 16384.0;
+  accelerometer3_z = accelerometer3_z / 16384.0;
   gyro3_x = Wire.read()<<8 | Wire.read(); // reading registers: 0x43 (GYRO_XOUT_H) and 0x44 (GYRO_XOUT_L)
   gyro3_y = Wire.read()<<8 | Wire.read(); // reading registers: 0x45 (GYRO_YOUT_H) and 0x46 (GYRO_YOUT_L)
   gyro3_z = Wire.read()<<8 | Wire.read(); // reading registers: 0x47 (GYRO_ZOUT_H) and 0x48 (GYRO_ZOUT_L)
